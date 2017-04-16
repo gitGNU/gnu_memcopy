@@ -115,7 +115,7 @@ inline void * memcopy(void * a_dest, void * a_src, const size_t a_byteLen) {
 //TODO:			Address in-built CPU features for faster memory vector operations.
 //			Address memory alignment
 inline void * memcopy8(void * a_dest, void * a_src, const size_t a_byteLen) {
-	for (size_t c = 0; c < a_byteLen; ++c)
+	for (uintptr c = 0; c < a_byteLen; ++c)
 		*((uint8 *)(a_dest)+c) = *((uint8 *)(a_src)+c);
 	return a_dest;
 }
@@ -131,7 +131,7 @@ inline void * memcopy8(void * a_dest, void * a_src, const size_t a_byteLen) {
 //			Address memory alignment
 inline void * memcopy16(void * a_dest, void * a_src, const size_t a_byteLen) {
 	assert(!(a_byteLen & 0x1));
-	for (size_t c = 0; c < a_byteLen; c += 2)
+	for (uintptr c = 0; c < a_byteLen; c += 2)
 		*((uint16 *)(a_dest)+c) = *((uint16 *)(a_src)+c);
 	return a_dest;
 }
@@ -147,7 +147,7 @@ inline void * memcopy16(void * a_dest, void * a_src, const size_t a_byteLen) {
 //			Address memory alignment
 inline void * memcopy32(void * a_dest, void * a_src, const size_t a_byteLen) {
 	assert(!(a_byteLen & 0x3));
-	for (size_t c = 0; c < a_byteLen; c += 4)
+	for (uintptr c = 0; c < a_byteLen; c += 4)
 		*((uint32 *)(a_dest)+c) = *((uint32 *)(a_src)+c);
 	return a_dest;
 }
@@ -163,9 +163,10 @@ inline void * memcopy32(void * a_dest, void * a_src, const size_t a_byteLen) {
 //			Address memory alignment
 inline void * memcopy64(void * a_dest, void * a_src, const size_t a_byteLen) {
 	assert(!(a_byteLen & 0x7));
-	for (size_t c = 0; c < a_byteLen; c += 8)
+	for (uintptr c = 0; c < a_byteLen; c += 8)
 		*((uint64 *)(a_dest)+c) = *((uint64 *)(a_src)+c);
 	return a_dest;
 }
 
 #endif
+

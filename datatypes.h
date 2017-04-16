@@ -26,13 +26,8 @@
 #include <vector.h>
 #endif
 
-#define P64_TO_P(p64)					((void *)(p64))
-#define P32_TO_P(p32)					P64_TO_P(p32)
-#define P16_TO_P(p16)					P64_TO_P(p16)
-#define P_TO_P64(p)					((uint64)(p))
-#define P_TO_P32(p)					((uint32)(p))
-#define P_TO_P16(p)					((uint16)(p))
-
+typedef uintptr_t					uintptr;
+typedef intptr_t					intptr;
 typedef uint8_t						uint8;
 typedef uint16_t					uint16;
 typedef uint32_t					uint32;
@@ -63,26 +58,62 @@ typedef struct {float32 flx32, fly32, flz32;}		Vector3D_fl32;
 typedef struct {float32 flx32, fly32, flz32, flt32;}	Vector4D_fl32;
 typedef struct {float64 flx64, fly64;}			Vector2D_fl64;
 typedef struct {float64 flx64, fly64, flz64;}		Vector3D_fl64;
-typedef struct {float64 flx64, fly64, flz64, flt64;}	Vector4D_fl641;
+typedef struct {float64 flx64, fly64, flz64, flt64;}	Vector4D_fl64;
 #endif
 
 //Title:	var64
 //Purpose:	Generic 64-bit variable, with all appropriate primitive containers
 //		suitable to be used (useful for loose type safety)
 typedef union {
-	uint64	pointer64;
 	uint64	var64;
 	int64	int64;
 	float64	float64;
-	uint32	pointer32[2];
-	uint32	var32[2];
-	int32	int32[2];
-	float32	float32[2];
-	uint16	pointer16[4];
-	uint16	var16[4];
-	int16	int16[4];
-	uint8	var8[8];
-	int8	int8[8];
+
+	struct {
+		uint32	a;
+		uint32	b;
+	} var32;
+	struct {
+		int32	a;
+		int32	b;
+	} int32;
+	struct {
+		float32	a;
+		float32 b;
+	} float32;
+	struct {
+		uint16	a;
+		uint16	b;
+		uint16	c;
+		uint16	d;
+	} var16;
+	struct {
+		int16	a;
+		int16	b;
+		int16	c;
+		int16	d;
+	} int16;
+	struct {
+		uint8	a;
+		uint8	b;
+		uint8	c;
+		uint8	d;
+		uint8	e;
+		uint8	f;
+		uint8	g;
+		uint8	h;
+	} var8;
+	struct {
+		int8	a;
+		int8	b;
+		int8	c;
+		int8	d;
+		int8	e;
+		int8	f;
+		int8	g;
+		int8	h;
+	} int8;
+
 	char	char8[8];
 } var64;
 
@@ -90,15 +121,31 @@ typedef union {
 //Purpose:	Generic 32-bit variable, with all appropriate primitive containers
 //		suitable to be used (useful for loose type safety)
 typedef union {
-	uint32	pointer32;
 	uint32	var32;
 	int32	int32;
 	float32	float32;
-	uint16	pointer16[2];
-	uint16	var16[2];
-	int16	int16[2];
-	uint8	var8[4];
-	int8	int8[4];
+
+	struct {
+		uint16	a;
+		uint16	b;
+	} var16;
+	struct {
+		int16	a;
+		int16	b;
+	} int16;
+	struct {
+		uint8	a;
+		uint8	b;
+		uint8	c;
+		uint8	d;
+	} var8;
+	struct {
+		int8	a;
+		int8	b;
+		int8	c;
+		int8	d;
+	} int8;
+
 	char	char8[4];
 } var32;
 
@@ -106,11 +153,18 @@ typedef union {
 //Purpose:	Generic 16-bit variable, with all appropriate primitive containers
 //		suitable to be used (useful for loose type safety)
 typedef union {
-	uint16	pointer16;
 	uint16	var16;
 	int16	int16;
-	uint8	var8[2];
-	int8	int8[2];
+
+	struct {
+		uint8	a;
+		uint8	b;
+	} var8;
+	struct {
+		int8	a;
+		int8	b;
+	} int8;
+
 	char	char8[2];
 } var16;
 
@@ -124,3 +178,4 @@ typedef union {
 } var8;
 
 #endif
+
