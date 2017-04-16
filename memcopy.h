@@ -47,7 +47,7 @@ inline void * memcopy(void * a_dest, void * a_src, const size_t a_byteLen) {
 		void * src = a_src;
 		size_t len = a_byteLen;
 		if (len > 8) {
-			register size_t offset = len & ~(uint64)(0x7);
+			size_t offset = len & ~(uint64)(0x7);
 			memcopy64(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
@@ -60,14 +60,14 @@ inline void * memcopy(void * a_dest, void * a_src, const size_t a_byteLen) {
 		void * src = a_src;
 		size_t len = a_byteLen;
 		if (len > 8) {
-			register size_t offset = len & ~(size_t)(0x7);
+			size_t offset = len & ~(size_t)(0x7);
 			memcopy64(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
 			len = a_byteLen & 0x7;
 		}
 		if (len > 4) {
-			register size_t offset = len & ~(size_t)(0x3);
+			size_t offset = len & ~(size_t)(0x3);
 			memcopy32(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
@@ -80,21 +80,21 @@ inline void * memcopy(void * a_dest, void * a_src, const size_t a_byteLen) {
 		void * src = a_src;
 		size_t len = a_byteLen;
 		if (len > 8) {
-			register size_t offset = len & ~(size_t)(0x7);
+			size_t offset = len & ~(size_t)(0x7);
 			memcopy64(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
 			len = a_byteLen & 0x7;
 		}
 		if (len > 4) {
-			register size_t offset = len & ~(size_t)(0x3);
+			size_t offset = len & ~(size_t)(0x3);
 			memcopy32(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
 			len = a_byteLen & 0x3;
 		}
 		if (len > 2) {
-			register size_t offset = len & ~(size_t)(0x1);
+			size_t offset = len & ~(size_t)(0x1);
 			memcopy16(dest, src, offset);
 			dest = (void *)((size_t)(a_dest) + offset);
 			src = (void *)((size_t)(a_src) + offset);
